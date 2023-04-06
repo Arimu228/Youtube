@@ -31,7 +31,6 @@
 
             <TextView
                 android:id="@+id/tv_play"
-                android:background=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -39,7 +38,7 @@
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/white"
-                tools:text="Playlist" />
+                tools:text="@string/pla" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

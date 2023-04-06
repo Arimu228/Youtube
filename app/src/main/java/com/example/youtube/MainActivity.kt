@@ -7,5 +7,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //AIzaSyAht9_KAH3Ugi24EqKLZTObGOATagWA2Z0
+
+        BuildConfig
     }
 }
