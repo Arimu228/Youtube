@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.PlayListActivity">
+    tools:context=".ui.playlist.PlayListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

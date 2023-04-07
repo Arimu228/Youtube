@@ -16,9 +16,11 @@ abstract class BaseActivity<VB : ViewBinding,VM : BaseViewModel>: AppCompatActiv
         setContentView(binding.root)
         isConnection()
         initViews()
+        initRecycler()
         initViewModel()
         initListener()
     }
+   open fun initRecycler() {}
     open fun isConnection() {}
     open fun initViews() {}
     open fun initListener() {}
