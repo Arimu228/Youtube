@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.youtube.databinding.ItemPlaylistBinding
 import com.example.youtube.model.Item
 
+
 class PlayListAdapter(private val onClick: (Item) -> Unit) :
     RecyclerView.Adapter<PlayListAdapter.PlayListViewHolder>() {
 

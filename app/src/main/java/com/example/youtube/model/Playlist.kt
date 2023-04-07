@@ -28,7 +28,7 @@ data class ContentDetails(
 
 data class Snippet(
     val publishedAt: String,
-    val channelId: Int,
+    val channelId: String,
     val title: String,
     val thumbnails: Thumbnails,
     val localized: Localized,

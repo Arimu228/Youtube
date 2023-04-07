@@ -38,7 +38,7 @@
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/white"
-                tools:text="@string/pla" />
+                android:text="@string/pla" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
