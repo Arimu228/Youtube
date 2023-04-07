@@ -1,6 +1,5 @@
 package com.example.youtube.model
 
-import com.google.gson.annotations.SerializedName
 
 data class Playlist(
     val kind: String,
@@ -31,16 +30,46 @@ data class Snippet(
     val publishedAt: String,
     val channelId: Int,
     val title: String,
-    val thumbnails: Thumbnails
+    val thumbnails: Thumbnails,
+    val localized: Localized,
+    val channelTitle: String,
+
 )
 
 data class Thumbnails(
-    @SerializedName("default")
-    val image: Default
+    val default: Default,
+    val high: High,
+    val maxres: Maxres,
+    val medium: Medium,
+    val standard: Standard
 )
 
 data class Default(
     val url: String,
     val width: Int,
     val height: Int
+)
+data class Localized(
+    val description: String,
+    val title: String
+)
+data class Standard(
+    val height: Int,
+    val url: String,
+    val width: Int
+)
+data class Medium(
+    val height: Int,
+    val url: String,
+    val width: Int
+)
+data class Maxres(
+    val height: Int,
+    val url: String,
+    val width: Int
+)
+data class High(
+    val height: Int,
+    val url: String,
+    val width: Int
 )

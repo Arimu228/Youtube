@@ -22,7 +22,7 @@ class MainViewModel : BaseViewModel() {
 
     private fun getPlaylist(): LiveData<Playlist> {
         val data = MutableLiveData<Playlist>()
-        apiService.getPlaylists(BuildConfig.API_KEY, "contentDetails", "UCzy6RoMcGa42SkiYJekudQw")
+        apiService.getPlaylists(BuildConfig.API_KEY, "contentDetails,snippet", "UCzy6RoMcGa42SkiYJekudQw")
             .enqueue(
                 object : Callback<Playlist> {
                     override fun onResponse(call: Call<Playlist>, response: Response<Playlist>) {
@@ -32,7 +32,7 @@ class MainViewModel : BaseViewModel() {
                     }
 
                     override fun onFailure(call: Call<Playlist>, t: Throwable) {
-                        Log.e("ololo", "onFailure: ${t.stackTrace}")
+                        Log.e("ololo", "onFailure: ${t.message}")
                     }
 
                 }

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Youtube"
         tools:targetApi="31" >
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.WatchActivity"
             android:exported="false" />
         <activity
             android:name=".ui.playlist.PlayListActivity"
