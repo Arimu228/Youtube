@@ -1,4 +1,4 @@
-package com.example.youtube.base
+package com.example.youtube.core.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -16,11 +16,9 @@ abstract class BaseActivity<VB : ViewBinding,VM : BaseViewModel>: AppCompatActiv
         setContentView(binding.root)
         isConnection()
         initViews()
-        initRecycler()
         initViewModel()
         initListener()
     }
-   open fun initRecycler() {}
     open fun isConnection() {}
     open fun initViews() {}
     open fun initListener() {}

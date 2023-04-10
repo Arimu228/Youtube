@@ -1,14 +1,15 @@
-package com.example.youtube.ui
+package com.example.youtube.ui.detail
 
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.youtube.base.BaseActivity
+import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityWatchBinding
+import com.example.youtube.ui.PlayListViewModel
 
-class WatchActivity : BaseActivity<ActivityWatchBinding, MainViewModel>() {
+class WatchActivity : BaseActivity<ActivityWatchBinding, PlayListViewModel>() {
 
-    override val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+    override val viewModel: PlayListViewModel by lazy {
+        ViewModelProvider(this)[PlayListViewModel::class.java]
     }
 
     override fun initListener() {

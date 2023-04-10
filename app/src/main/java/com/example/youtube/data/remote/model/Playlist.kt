@@ -1,4 +1,4 @@
-package com.example.youtube.model
+package com.example.youtube.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -35,7 +35,7 @@ data class Snippet(
     val thumbnails: Thumbnails,
     val channelTitle: String,
 
-)
+    )
 
 data class Thumbnails(
    @SerializedName("standard")

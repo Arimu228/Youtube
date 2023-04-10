@@ -5,11 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.playlist.PlayListActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:indeterminateTint="@color/rd"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="179dp"
+        android:layout_marginBottom="333dp" />
+
+    <include
+        layout="@layout/check_internet_layout"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_playlist"/>
+        android:padding="10dp"
+        tools:listitem="@layout/item_playlist" />
 
 </RelativeLayout>
