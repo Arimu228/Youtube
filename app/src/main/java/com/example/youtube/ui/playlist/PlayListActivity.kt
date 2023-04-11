@@ -1,6 +1,9 @@
 package com.example.youtube.ui.playlist
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,6 +21,13 @@ class PlayListActivity : BaseActivity<ActivityPlaylistBinding, PlayListViewModel
 
     override val viewModel: PlayListViewModel by lazy {
         ViewModelProvider(this)[PlayListViewModel::class.java]
+    }
+
+    override fun isInternetAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        val network = connectivityManager?.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
     override fun initViews() {
@@ -46,6 +56,13 @@ class PlayListActivity : BaseActivity<ActivityPlaylistBinding, PlayListViewModel
                     viewModel.loading.postValue(false)
                 }
             }
+        }
+    }
+
+    override fun isConnection() {
+        super.isConnection()
+        if(!isInternetAvailable()) {
+            binding.checkInternet.failInternet.isVisible = true
         }
     }
 

@@ -9,6 +9,8 @@ abstract class BaseActivity<VB : ViewBinding,VM : BaseViewModel>: AppCompatActiv
     protected lateinit var binding: VB
     protected abstract fun inflateViewBinding() : VB
     protected abstract val viewModel: VM
+    abstract fun isInternetAvailable(): Boolean
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

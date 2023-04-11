@@ -10,14 +10,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:indeterminate="true"
-        android:visibility="gone"
-        android:indeterminateTint="@color/rd"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="179dp"
-        android:layout_marginBottom="333dp" />
+        android:layout_marginBottom="333dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/rd"
+        android:visibility="gone" />
 
     <include
+        android:id="@+id/check_internet"
         layout="@layout/check_internet_layout"
         android:visibility="gone" />
 
