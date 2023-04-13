@@ -12,7 +12,7 @@ import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityPlaylistBinding
 import com.example.youtube.data.remote.model.Item
 import com.example.youtube.ui.PlayListViewModel
-import com.example.youtube.ui.detail.WatchActivity
+import com.example.youtube.ui.detail.DetailActivity
 
 class PlayListActivity : BaseActivity<ActivityPlaylistBinding, PlayListViewModel>() {
 
@@ -71,7 +71,7 @@ class PlayListActivity : BaseActivity<ActivityPlaylistBinding, PlayListViewModel
     }
 
     private fun onClick(item: Item) {
-        val intent = Intent(this, WatchActivity::class.java)
+        val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("id", item.id)
         startActivity(intent)
     }

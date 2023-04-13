@@ -11,7 +11,7 @@ import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityWatchBinding
 import com.example.youtube.ui.PlayListViewModel
 
-class WatchActivity : BaseActivity<ActivityWatchBinding, PlayListViewModel>() {
+class DetailActivity : BaseActivity<ActivityWatchBinding, PlayListViewModel>() {
 
     override val viewModel: PlayListViewModel by lazy {
         ViewModelProvider(this)[PlayListViewModel::class.java]

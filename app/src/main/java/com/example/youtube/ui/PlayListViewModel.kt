@@ -9,6 +9,6 @@ import com.example.youtube.data.remote.model.Playlist
 class PlayListViewModel : BaseViewModel() {
 
     fun getPlaylists(): LiveData<Resource<Playlist>> {
-        return App.repository.getPlaylist()
+        return App.repository.getPlaylists()
     }
 }

@@ -13,4 +13,11 @@ interface ApiService {
         @Query("part") part:String,
         @Query("channelId") channelId:String
         ) : Response<Playlist>
+
+   @GET("playlistItems")
+   suspend fun getPlaylistItem(
+       @Query("key") key: String,
+       @Query("part") part: String,
+       @Query("playlistId") playlistId: String
+   )
 }

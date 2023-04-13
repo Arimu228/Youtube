@@ -7,6 +7,7 @@ import com.example.youtube.BuildConfig
 import com.example.youtube.core.network.RetrofitClient
 import com.example.youtube.core.network.result.Resource
 import com.example.youtube.data.remote.ApiService
+import com.example.youtube.data.remote.RemoteDataSource
 import com.example.youtube.data.remote.model.Playlist
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Call
@@ -15,23 +16,15 @@ import retrofit2.Response
 
 class Repository {
 
-    private val apiService: ApiService = RetrofitClient.create()
+    private val dataSource: RemoteDataSource by lazy {
+        RemoteDataSource()
+    }
 
-    fun getPlaylist(): LiveData<Resource<Playlist>> {
+    fun getPlaylists(): LiveData<Resource<Playlist>> {
         return liveData(Dispatchers.IO) {
             emit(Resource.loading())
-            val response = apiService.getPlaylists(
-                BuildConfig.API_KEY,
-                "contentDetails,snippet",
-                "UCzy6RoMcGa42SkiYJekudQw"
-            )
-            emit(
-                if (response.isSuccessful) Resource.success(response.body()) else Resource.error(
-                    response.message(),
-                    response.body(),
-                    response.code()
-                )
-            )
+            val response = dataSource.getPlaylists()
+            emit(response)
         }
     }
 }
