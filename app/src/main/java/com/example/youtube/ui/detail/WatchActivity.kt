@@ -3,6 +3,7 @@ package com.example.youtube.ui.detail
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -34,9 +35,11 @@ class WatchActivity : BaseActivity<ActivityWatchBinding, PlayListViewModel>() {
         super.initListener()
         val getId = intent.getStringExtra("id")
         Toast.makeText(this, getId, Toast.LENGTH_SHORT).show()
+        Log.e("ololo", "initListener: $getId", )
     }
 
     override fun inflateViewBinding(): ActivityWatchBinding {
         return ActivityWatchBinding.inflate(layoutInflater)
     }
+
 }

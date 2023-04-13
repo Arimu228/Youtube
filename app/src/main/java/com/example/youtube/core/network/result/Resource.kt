@@ -1,6 +1,6 @@
 package com.example.youtube.core.network.result
 
-class Resource<T>(val data: T?, val message: String?, val status: Status) {
+class Resource<out T>(val status: Status, val data: T?, val message: String?, val code: Int?) {
 
     enum class Status {
         SUCCESS,
@@ -8,17 +8,16 @@ class Resource<T>(val data: T?, val message: String?, val status: Status) {
         LOADING
     }
 
-    companion object{
-        fun <T> success(data:T): Resource<T>{
-            return Resource(data,null,Status.SUCCESS)
+    companion object {
+        fun <T> success(data: T?): Resource<T> {
+            return Resource(Status.SUCCESS, data, null, null)
+        }
+        fun <T> loading(): Resource<T> {
+            return Resource(Status.LOADING, null, null, null)
         }
 
-        fun <T> loading(): Resource<T>{
-            return Resource(null,null,Status.LOADING)
-        }
-
-        fun <T> error(msg: String): Resource<T>{
-            return Resource(null, msg,Status.ERROR)
+        fun <T> error(msg: String?, data: T?, code: Int?): Resource<T> {
+            return Resource(Status.ERROR, data, msg, code)
         }
     }
 }
