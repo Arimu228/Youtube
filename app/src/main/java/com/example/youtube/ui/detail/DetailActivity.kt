@@ -7,39 +7,54 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.youtube.core.ui.BaseActivity
-import com.example.youtube.databinding.ActivityWatchBinding
-import com.example.youtube.ui.PlayListViewModel
+import com.example.youtube.databinding.ActivityDetailBinding
 
-class DetailActivity : BaseActivity<ActivityWatchBinding, PlayListViewModel>() {
+class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
 
-    override val viewModel: PlayListViewModel by lazy {
-        ViewModelProvider(this)[PlayListViewModel::class.java]
+    private lateinit var adapter: DetailAdapter
+    override val viewModel: DetailViewModel by lazy {
+        ViewModelProvider(this)[DetailViewModel::class.java]
     }
 
     override fun isInternetAvailable(): Boolean {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         val network = connectivityManager?.activeNetwork ?: return false
         val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
+    override fun initViews() {
+        super.initViews()
+        adapter = DetailAdapter()
+        binding.videosRv.layoutManager = GridLayoutManager(this, 1)
+        binding.videosRv.adapter = adapter
+    }
+
+    override fun initViewModel() {
+        super.initViewModel()
+        val getId = intent.getStringExtra("id")
+
+        viewModel.getPlaylistItem(getId).observe(this) {
+            it.data?.let { it1 -> adapter.addList(it1.items) }
+        }
+    }
+
     override fun isConnection() {
         super.isConnection()
-        if(!isInternetAvailable()) {
+        if (!isInternetAvailable()) {
             binding.checkInternet.failInternet.isVisible = true
         }
     }
 
     override fun initListener() {
         super.initListener()
-        val getId = intent.getStringExtra("id")
-        Toast.makeText(this, getId, Toast.LENGTH_SHORT).show()
-        Log.e("ololo", "initListener: $getId", )
     }
 
-    override fun inflateViewBinding(): ActivityWatchBinding {
-        return ActivityWatchBinding.inflate(layoutInflater)
+    override fun inflateViewBinding(): ActivityDetailBinding {
+        return ActivityDetailBinding.inflate(layoutInflater)
     }
 
 }
