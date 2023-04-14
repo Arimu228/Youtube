@@ -6,54 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
 
-
     <include
         android:id="@+id/check_internet"
         layout="@layout/check_internet_layout"
         android:visibility="gone" />
 
-
     <ImageView
-        android:id="@+id/back_img"
+        android:id="@+id/img_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="38dp"
         android:src="@drawable/baseline_arrow_back_ios_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/back" />
 
     <TextView
-        android:id="@+id/back_tv"
+        android:id="@+id/tv_back"
         android:layout_width="38dp"
         android:layout_height="22dp"
-        android:layout_marginLeft="33dp"
+        android:layout_marginStart="33dp"
         android:layout_marginTop="36dp"
-        android:lineHeight="24sp"
-        android:text="Back"
-        android:textColor="#FF0000"
+        android:text="@string/back"
+        android:textColor="#DD2C00"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:layout_width="65dp"
         android:layout_height="24dp"
         android:layout_marginTop="36dp"
-        android:lineHeight="24sp"
-        android:text="Playlist"
-        android:textColor="#FF0000"
+        android:text="@string/playlist"
+        android:textColor="@color/rd"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="76dp"
         android:fitsSystemWindows="true"
+        android:backgroundTint="@color/rd"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="60dp">
 
@@ -64,8 +64,8 @@
             android:layout_height="300dp"
             android:fitsSystemWindows="true">
 
+
             <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -79,26 +79,32 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/title_tv"
+                        android:id="@+id/tv_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="16dp"
                         android:textColor="@color/black"
-                        tools:text="ccccccccccccccc"
+                        android:layout_marginStart="10dp"
+                        tools:text="Title"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/desc_tv"
+                        android:id="@+id/tv_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginBottom="16dp"
-                        tools:text="ccccccccccccccc"
                         android:gravity="center_vertical"
-                        android:textSize="16sp" />
+                        android:layout_marginStart="10dp"
+                        android:textSize="16sp"
+                        tools:text="Description" />
+
+                    <TextView
+                        android:id="@+id/tv_counter_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Video Series 33" />
 
                 </LinearLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -108,14 +114,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:contentDescription="FAB button"
             android:backgroundTint="@color/rd"
+            android:contentDescription="@string/fab_button"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|right|end"
-            app:srcCompat="@android:drawable/ic_media_play" />
+            app:srcCompat="@android:drawable/ic_media_play"
+            tools:ignore="RedundantDescriptionCheck" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/videos_rv"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

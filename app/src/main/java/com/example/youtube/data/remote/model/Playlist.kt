@@ -8,7 +8,8 @@ data class Playlist(
     val items: List<Item>,
     val etag: String,
     val nextPageToken: String,
-    val pageInfo: PageInfo
+    val pageInfo: PageInfo,
+    val snippet: Snippet
 )
 
 data class PageInfo(
@@ -32,6 +33,7 @@ data class Snippet(
     val publishedAt: String,
     val channelId: String,
     val title: String,
+    val description: String,
     val thumbnails: Thumbnails,
     val channelTitle: String,
 

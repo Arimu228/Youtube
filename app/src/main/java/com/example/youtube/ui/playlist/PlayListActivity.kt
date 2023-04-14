@@ -11,16 +11,16 @@ import com.example.youtube.core.network.result.Resource
 import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityPlaylistBinding
 import com.example.youtube.data.remote.model.Item
-import com.example.youtube.ui.PlayListViewModel
+import com.example.youtube.ui.MainViewModel
 import com.example.youtube.ui.detail.DetailActivity
 
-class PlayListActivity : BaseActivity<ActivityPlaylistBinding, PlayListViewModel>() {
+class PlayListActivity : BaseActivity<ActivityPlaylistBinding, MainViewModel>() {
 
     private lateinit var adapter: PlayListAdapter
 
 
-    override val viewModel: PlayListViewModel by lazy {
-        ViewModelProvider(this)[PlayListViewModel::class.java]
+    override val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
     }
 
     override fun isInternetAvailable(): Boolean {
@@ -73,6 +73,9 @@ class PlayListActivity : BaseActivity<ActivityPlaylistBinding, PlayListViewModel
     private fun onClick(item: Item) {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("id", item.id)
+        intent.putExtra("title", item.snippet.title)
+        intent.putExtra("desc", item.snippet.description)
+        intent.putExtra("count",item.contentDetails.itemCount)
         startActivity(intent)
     }
 
