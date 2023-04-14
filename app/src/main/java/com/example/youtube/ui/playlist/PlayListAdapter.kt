@@ -45,7 +45,7 @@ class PlayListAdapter(private val onClick: (Item) -> Unit) :
         fun onBind(item: Item) {
             binding.imgPlay.loadImage(item.snippet.thumbnails.image.url)
             binding.tvTitle.text = item.snippet.title
-            binding.tvCount.text = item.contentDetails.itemCount.toString() + "video series"
+            binding.tvCount.text = item.contentDetails.itemCount.toString() + " video series"
             binding.cvImage.setOnClickListener {
                 onClick.invoke(item)
             }

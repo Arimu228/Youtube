@@ -10,15 +10,22 @@ interface ApiService {
 
     @GET("playlists")
    suspend fun getPlaylists(
-        @Query("key") key:String,
-        @Query("part") part:String,
-        @Query("channelId") channelId:String
-        ) : Response<Playlist>
+        @Query("key") key: String,
+        @Query("part") part: String,
+        @Query("channelId") channelId: String,
+    ): Response<Playlist>
 
-   @GET("playlistItems")
-   suspend fun getPlaylistItem(
-       @Query("key") key: String,
-       @Query("part") part: String,
-       @Query("playlistId") playlistId: String
-   ) : Response<PlaylistItem>
+    @GET("playlistItems")
+    suspend fun getPlaylistItem(
+        @Query("key") key: String,
+        @Query("part") part: String,
+        @Query("playlistId") playlistId: String,
+    ): Response<PlaylistItem>
+
+//    @GET("videos")
+//    suspend fun getVideo(
+//        @Query("key") key: String,
+//        @Query("part") part: String,
+//        @Query("id") id: String
+//    ):
 }
