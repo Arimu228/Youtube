@@ -8,6 +8,8 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.youtube.core.network.result.Resource
 import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityPlaylistBinding
@@ -34,7 +36,7 @@ class PlayListActivity : BaseActivity<ActivityPlaylistBinding, MainViewModel>() 
     override fun initViews() {
         super.initViews()
         adapter = PlayListAdapter(this::onClick)
-        binding.recyclerView.layoutManager = GridLayoutManager(this, 1)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
     }
 

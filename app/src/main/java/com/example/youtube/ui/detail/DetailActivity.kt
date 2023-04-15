@@ -6,7 +6,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityDetailBinding
 import com.example.youtube.ui.MainViewModel
@@ -29,7 +30,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, MainViewModel>() {
     override fun initViews() {
         super.initViews()
         adapter = DetailAdapter()
-        binding.recyclerView.layoutManager = GridLayoutManager(this, 1)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
     }
 
