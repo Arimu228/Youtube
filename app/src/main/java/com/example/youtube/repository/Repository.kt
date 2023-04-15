@@ -6,6 +6,7 @@ import com.example.youtube.core.network.result.Resource
 import com.example.youtube.data.remote.RemoteDataSource
 import com.example.youtube.data.remote.model.Playlist
 import com.example.youtube.data.remote.model.PlaylistItem
+import com.example.youtube.data.remote.model.Videos
 import kotlinx.coroutines.Dispatchers
 
 
@@ -22,10 +23,19 @@ class Repository {
             emit(response)
         }
     }
-    fun getPlaylistItem(playlistId:String?): LiveData<Resource<PlaylistItem>> {
+
+    fun getPlaylistItem(playlistId: String): LiveData<Resource<PlaylistItem>> {
         return liveData(Dispatchers.IO) {
             emit(Resource.loading())
             val response = dataSource.getPlaylistItem(playlistId)
+            emit(response)
+        }
+    }
+
+    fun getVideo(id: String): LiveData<Resource<Videos>> {
+        return liveData(Dispatchers.IO) {
+            emit(Resource.loading())
+            val response = dataSource.getVideo(id)
             emit(response)
         }
     }

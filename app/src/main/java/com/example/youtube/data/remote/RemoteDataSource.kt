@@ -3,7 +3,6 @@ package com.example.youtube.data.remote
 import com.example.youtube.BuildConfig
 import com.example.youtube.core.network.BaseDataSource
 import com.example.youtube.core.network.RetrofitClient
-import com.example.youtube.data.remote.model.PlaylistItem
 import com.example.youtube.utils.Const
 
 class RemoteDataSource : BaseDataSource() {
@@ -23,6 +22,14 @@ class RemoteDataSource : BaseDataSource() {
             BuildConfig.API_KEY,
             Const.part,
             playlistId!!
+        )
+    }
+
+    suspend fun getVideo(id: String?) = getResult {
+        apiService.getVideo(
+            BuildConfig.API_KEY,
+            Const.part,
+            id!!
         )
     }
 }

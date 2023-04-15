@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,7 +20,7 @@ class PlayListActivity : BaseActivity<ActivityPlaylistBinding, MainViewModel>() 
     private lateinit var adapter: PlayListAdapter
 
 
-    override val viewModel: MainViewModel by lazy {
+    override val viewModel:  MainViewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
 

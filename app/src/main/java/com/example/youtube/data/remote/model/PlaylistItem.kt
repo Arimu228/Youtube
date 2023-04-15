@@ -5,6 +5,7 @@ data class PlaylistItem(
     val etag: String?,
     val nextPageToken: String?,
     val items: List<Item?>?,
+    val snippet: Item.Snippet?,
     val pageInfo: PageInfo?
 ) {
     data class Item(

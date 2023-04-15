@@ -45,7 +45,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, MainViewModel>() {
             it.data?.let { it1 -> adapter.addList(it1.items) }
             binding.tvTitle.text = getTitle
             binding.tvDesc.text = getDesc
-            binding.tvCounterVideo.text = getCount.toString() + " video series"
+            binding.tvCounterVideo.text = "$getCount video series"
         }
 
     }
