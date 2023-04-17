@@ -4,27 +4,21 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.youtube.core.network.result.Resource
 import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityPlaylistBinding
 import com.example.youtube.data.remote.model.Item
 import com.example.youtube.ui.MainViewModel
 import com.example.youtube.ui.detail.DetailActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlayListActivity : BaseActivity<ActivityPlaylistBinding, MainViewModel>() {
 
     private lateinit var adapter: PlayListAdapter
 
-
-    override val viewModel:  MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
-    }
+    override val viewModel:  MainViewModel by viewModel()
 
     override fun isInternetAvailable(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?

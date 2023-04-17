@@ -74,7 +74,8 @@ data class PlaylistItem(
 
         data class ContentDetails(
             val videoId: String?,
-            val videoPublishedAt: String?
+            val videoPublishedAt: String?,
+            val duration: String,
         )
     }
 

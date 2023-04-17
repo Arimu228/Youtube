@@ -7,18 +7,19 @@ import com.example.youtube.core.ui.BaseViewModel
 import com.example.youtube.data.remote.model.Playlist
 import com.example.youtube.data.remote.model.PlaylistItem
 import com.example.youtube.data.remote.model.Videos
+import com.example.youtube.repository.Repository
 
-class MainViewModel : BaseViewModel() {
+class MainViewModel(private val repository: Repository) : BaseViewModel() {
 
     fun getPlaylists(): LiveData<Resource<Playlist>> {
-        return App.repository.getPlaylists()
+        return repository.getPlaylists()
     }
 
     fun getPlaylistItem(playlistId: String?): LiveData<Resource<PlaylistItem>> {
-        return App.repository.getPlaylistItem(playlistId!!)
+        return repository.getPlaylistItem(playlistId!!)
     }
 
     fun getVideo(id: String): LiveData<Resource<Videos>> {
-        return App.repository.getVideo(id)
+        return repository.getVideo(id)
     }
 }

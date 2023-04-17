@@ -7,17 +7,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.youtube.App
 import com.example.youtube.core.network.result.Resource
 import com.example.youtube.data.remote.model.Items
 import com.example.youtube.data.remote.model.PlaylistItem
 import com.example.youtube.databinding.ItemDetailBinding
+import com.example.youtube.ui.MainViewModel
 import com.example.youtube.ui.detail.ConvertDuration.convertDuration
 import com.example.youtube.ui.playlist.loadImage
+import org.koin.androidx.viewmodel.compat.ScopeCompat.viewModel
+
 
 class DetailAdapter :
     RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
     private var playlistItems = listOf<PlaylistItem.Item>()
+
 
     @SuppressLint("NotifyDataSetChanged")
     fun addList(list: List<PlaylistItem.Item?>?) {
@@ -58,15 +61,19 @@ class DetailAdapter :
             if (videoItem != null) {
                 val duration = convertDuration(videoItem.contentDetails.duration)
                 binding.durationTv.text = duration
-                Log.e("com.example.youtube.ui.detail.DetailAdapter", "onBind: ${(videoItem.contentDetails)}")
+                Log.e(
+                    "com.example.youtube.ui.detail.DetailAdapter",
+                    "onBind: ${(videoItem.contentDetails)}"
+                )
             }
         }
     }
 }
 
 object VideoId {
+    private val viewModel: MainViewModel by viewModel()
     fun setVideo(id: String, onResult: (Items?) -> Unit) {
-        App.repository.getVideo(id).observeForever { resource ->
+        viewModel.getVideo(id).observeForever { resource ->
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
                     val video = resource.data?.items?.getOrNull(0)
@@ -79,6 +86,7 @@ object VideoId {
         }
     }
 }
+
 
 object ConvertDuration {
     fun convertDuration(duration: String): String {

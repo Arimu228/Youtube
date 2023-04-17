@@ -5,19 +5,17 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityDetailBinding
 import com.example.youtube.ui.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailActivity : BaseActivity<ActivityDetailBinding, MainViewModel>() {
 
     private lateinit var adapter: DetailAdapter
-    override val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
-    }
+
+    override val viewModel:  MainViewModel by viewModel()
 
     override fun isInternetAvailable(): Boolean {
         val connectivityManager =
