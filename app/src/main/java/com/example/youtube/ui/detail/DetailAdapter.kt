@@ -42,50 +42,52 @@ class DetailAdapter :
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
         val playlistItem = playlistItems[position]
         val videoId = playlistItem.contentDetails?.videoId
-        if (videoId != null) {
-            VideoId.setVideo(videoId) { video ->
-                holder.onBind(playlistItem, video)
-            }
-        } else {
-            holder.onBind(playlistItem, null)
-        }
+//        if (videoId != null) {
+////            VideoId.setVideo(videoId) { video ->
+////                holder.onBind(playlistItem, video)
+////            }
+////        } else {
+////            holder.onBind(playlistItem, null)
+////        }
+        holder.onBind(playlistItem)
     }
 
     inner class DetailViewHolder(private val binding: ItemDetailBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         @RequiresApi(Build.VERSION_CODES.O)
-        fun onBind(item: PlaylistItem.Item, videoItem: Items?) {
+        fun onBind(item: PlaylistItem.Item) {
+//            fun onBind(item: PlaylistItem.Item, videoItem: Items?) {
             binding.image.loadImage(item.snippet?.thumbnails?.standard?.url!!)
             binding.titleTv.text = item.snippet.title
-            if (videoItem != null) {
-                val duration = convertDuration(videoItem.contentDetails.duration)
-                binding.durationTv.text = duration
-                Log.e(
-                    "com.example.youtube.ui.detail.DetailAdapter",
-                    "onBind: ${(videoItem.contentDetails)}"
-                )
-            }
+//            if (videoItem != null) {
+//                val duration = convertDuration(videoItem.contentDetails.duration)
+//                binding.durationTv.text = duration
+//                Log.e(
+//                    "com.example.youtube.ui.detail.DetailAdapter",
+//                    "onBind: ${(videoItem.contentDetails)}"
+//                )
         }
     }
 }
 
-object VideoId {
-    private val viewModel: MainViewModel by viewModel()
-    fun setVideo(id: String, onResult: (Items?) -> Unit) {
-        viewModel.getVideo(id).observeForever { resource ->
-            when (resource.status) {
-                Resource.Status.SUCCESS -> {
-                    val video = resource.data?.items?.getOrNull(0)
-                    onResult(video)
-                }
-                else -> {
-                    onResult(null)
-                }
-            }
-        }
-    }
-}
+
+//object VideoId {
+//    private val viewModel: MainViewModel by viewModel()
+//    fun setVideo(id: String, onResult: (Items?) -> Unit) {
+//        viewModel.getVideo(id).observeForever { resource ->
+//            when (resource.status) {
+//                Resource.Status.SUCCESS -> {
+//                    val video = resource.data?.items?.getOrNull(0)
+//                    onResult(video)
+//                }
+//                else -> {
+//                    onResult(null)
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 object ConvertDuration {
