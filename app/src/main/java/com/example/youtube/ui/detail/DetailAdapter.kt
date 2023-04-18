@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.youtube.core.network.result.Resource
+import com.example.youtube.data.remote.model.Item
 import com.example.youtube.data.remote.model.Items
 import com.example.youtube.data.remote.model.PlaylistItem
 import com.example.youtube.databinding.ItemDetailBinding
@@ -17,7 +18,7 @@ import com.example.youtube.ui.playlist.loadImage
 import org.koin.androidx.viewmodel.compat.ScopeCompat.viewModel
 
 
-class DetailAdapter :
+class DetailAdapter(private val onClick: (PlaylistItem.Item) -> Unit) :
     RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
     private var playlistItems = listOf<PlaylistItem.Item>()
 
@@ -60,6 +61,9 @@ class DetailAdapter :
 //            fun onBind(item: PlaylistItem.Item, videoItem: Items?) {
             binding.image.loadImage(item.snippet?.thumbnails?.standard?.url!!)
             binding.titleTv.text = item.snippet.title
+            binding.cvImage.setOnClickListener {
+                onClick.invoke(item)
+            }
 //            if (videoItem != null) {
 //                val duration = convertDuration(videoItem.contentDetails.duration)
 //                binding.durationTv.text = duration

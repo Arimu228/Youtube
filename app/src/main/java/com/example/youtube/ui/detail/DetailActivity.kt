@@ -2,13 +2,17 @@ package com.example.youtube.ui.detail
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.youtube.core.ui.BaseActivity
+import com.example.youtube.data.remote.model.Item
+import com.example.youtube.data.remote.model.PlaylistItem
 import com.example.youtube.databinding.ActivityDetailBinding
 import com.example.youtube.ui.MainViewModel
+import com.example.youtube.ui.player.PlayerActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailActivity : BaseActivity<ActivityDetailBinding, MainViewModel>() {
@@ -27,7 +31,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, MainViewModel>() {
 
     override fun initViews() {
         super.initViews()
-        adapter = DetailAdapter()
+        adapter = DetailAdapter(this::onClick)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
     }
@@ -65,5 +69,13 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, MainViewModel>() {
     override fun inflateViewBinding(): ActivityDetailBinding {
         return ActivityDetailBinding.inflate(layoutInflater)
     }
+    private fun onClick(item: PlaylistItem.Item) {
+        val intent = Intent(this, PlayerActivity::class.java)
+        intent.putExtra("id", item.id)
+        intent.putExtra("title", item.snippet?.title)
+        intent.putExtra("desc", item.snippet?.description)
+        startActivity(intent)
+    }
+
 
 }

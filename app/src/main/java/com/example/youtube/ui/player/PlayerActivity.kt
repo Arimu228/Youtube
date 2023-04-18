@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -13,7 +11,6 @@ import androidx.core.view.isVisible
 import com.example.youtube.R
 import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityPlayerBinding
-import com.example.youtube.databinding.ActivityPlaylistBinding
 import com.example.youtube.ui.MainViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -52,12 +49,25 @@ class PlayerActivity :  BaseActivity<ActivityPlayerBinding, MainViewModel>() {
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
 
     }
+
     override fun isConnection() {
         super.isConnection()
-        if(!isInternetAvailable()) {
+        if (!isInternetAvailable()) {
             binding.checkInternet.failInternet.isVisible = true
         }
     }
+
+    override fun initViewModel() {
+        super.initViewModel()
+        val getId = intent.getStringExtra("id")
+        val getTitle = intent.getStringExtra("title")
+        val getDesc = intent.getStringExtra("desc")
+        viewModel.getVideo(getId!!).observe(this) {
+            binding.tvTitle.text = getTitle
+            binding.tvDesc.text = getDesc
+        }
+    }
+
     public override fun onStart() {
         super.onStart()
         if (Util.SDK_INT > 23) {
@@ -93,6 +103,13 @@ class PlayerActivity :  BaseActivity<ActivityPlayerBinding, MainViewModel>() {
             releasePlayer()
         }
     }
+
+    override fun initListener() {
+        super.initListener()
+        binding.imgBack.setOnClickListener { finish() }
+        binding.tvBack.setOnClickListener { finish() }
+    }
+
     private fun releasePlayer() {
         player?.let { exoPlayer ->
             playbackPosition = exoPlayer.currentPosition
