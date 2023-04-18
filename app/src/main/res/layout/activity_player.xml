@@ -4,13 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.PlayerActivity">
+    tools:context=".ui.player.PlayerActivity">
+
+    <include
+        android:id="@+id/check_internet"
+        layout="@layout/check_internet_layout"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/img_back"
+        android:text="@string/back"
+        android:textColor="#FF0000"
+        android:textSize="17sp"
+        app:layout_constraintStart_toEndOf="@id/img_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_playlist"
+        android:layout_width="65dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/tv_back"
+        android:paddingHorizontal="110dp"
+        android:text="@string/playlist"
+        android:textColor="#FF0000"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.media3.ui.PlayerView
+    <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="300dp"
+        android:layout_below="@+id/tv_playlist" />
 
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/video_view"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:backgroundTint="@color/white"
+        android:drawableEnd="@drawable/baseline_cloud_download_24"
+        android:text="@string/download"
+        android:textAllCaps="false"
+        android:textColor="@color/rd"
+        android:textStyle="bold"
+        app:strokeColor="@color/rd"
+        app:strokeWidth="2dp" />
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_download"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="Desc" />
 
 </RelativeLayout>
