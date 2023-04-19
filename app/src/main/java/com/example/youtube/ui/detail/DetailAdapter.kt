@@ -43,7 +43,7 @@ class DetailAdapter(private val onClick: (PlaylistItem.Item) -> Unit) :
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun onBind(item: PlaylistItem.Item) {
-            binding.image.loadImage(item.snippet?.thumbnails?.standard?.url!!)
+            binding.image.loadImage(item.snippet?.thumbnails?.high?.url!!)
             binding.titleTv.text = item.snippet.title
             binding.durationTv.text = item.date?.let { ConvertDuration.convertDuration(it) }
             binding.cvImage.setOnClickListener {

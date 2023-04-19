@@ -26,7 +26,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/venuemenu_rib_collapsing"
             android:layout_width="match_parent"
-            android:layout_height="248dp"
+            android:layout_height="wrap_content"
             android:background="#CFCFCF"
             android:fitsSystemWindows="true"
             android:minHeight="48dp"
@@ -129,9 +129,12 @@
         android:backgroundTint="@color/rd"
         android:contentDescription="@string/fab_button1"
         android:tint="@color/white"
+        app:layout_scrollFlags="scroll"
         app:layout_anchor="@id/venuemenu_rib_appbar"
         app:layout_anchorGravity="bottom|end"
+        android:layout_gravity="top"
         app:srcCompat="@android:drawable/ic_media_play"
         tools:ignore="RtlHardcoded" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

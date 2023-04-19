@@ -38,6 +38,7 @@ class PlayerActivity :  BaseActivity<ActivityPlayerBinding, MainViewModel>() {
                 binding.videoView.player = exoPlayer
             }
 
+
         val youtubeLink = "http://youtube.com/watch?v=${intent.getStringExtra("id")}"
 
         object: YouTubeExtractor(this) {
