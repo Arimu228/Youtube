@@ -14,6 +14,7 @@ interface ApiService {
         @Query("key") key: String,
         @Query("part") part: String,
         @Query("channelId") channelId: String,
+        @Query("maxResults") macResults : Int
     ): Response<Playlist>
 
     @GET("playlistItems")
@@ -21,6 +22,7 @@ interface ApiService {
         @Query("key") key: String,
         @Query("part") part: String,
         @Query("playlistId") playlistId: String,
+        @Query("maxResults") macResults : Int
     ): Response<PlaylistItem>
 
     @GET("videos")

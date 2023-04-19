@@ -12,6 +12,7 @@ data class PlaylistItem(
         val kind: String?,
         val etag: String?,
         val id: String?,
+        var date: String?,
         val snippet: Snippet?,
         val contentDetails: ContentDetails?
     ) {

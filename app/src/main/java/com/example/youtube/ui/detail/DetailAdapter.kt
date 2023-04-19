@@ -2,20 +2,13 @@ package com.example.youtube.ui.detail
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.youtube.core.network.result.Resource
-import com.example.youtube.data.remote.model.Item
-import com.example.youtube.data.remote.model.Items
 import com.example.youtube.data.remote.model.PlaylistItem
 import com.example.youtube.databinding.ItemDetailBinding
-import com.example.youtube.ui.MainViewModel
-import com.example.youtube.ui.detail.ConvertDuration.convertDuration
 import com.example.youtube.ui.playlist.loadImage
-import org.koin.androidx.viewmodel.compat.ScopeCompat.viewModel
 
 
 class DetailAdapter(private val onClick: (PlaylistItem.Item) -> Unit) :
@@ -42,14 +35,6 @@ class DetailAdapter(private val onClick: (PlaylistItem.Item) -> Unit) :
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
         val playlistItem = playlistItems[position]
-        val videoId = playlistItem.contentDetails?.videoId
-//        if (videoId != null) {
-////            VideoId.setVideo(videoId) { video ->
-////                holder.onBind(playlistItem, video)
-////            }
-////        } else {
-////            holder.onBind(playlistItem, null)
-////        }
         holder.onBind(playlistItem)
     }
 
@@ -58,52 +43,26 @@ class DetailAdapter(private val onClick: (PlaylistItem.Item) -> Unit) :
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun onBind(item: PlaylistItem.Item) {
-//            fun onBind(item: PlaylistItem.Item, videoItem: Items?) {
             binding.image.loadImage(item.snippet?.thumbnails?.standard?.url!!)
             binding.titleTv.text = item.snippet.title
+            binding.durationTv.text = item.date?.let { ConvertDuration.convertDuration(it) }
             binding.cvImage.setOnClickListener {
                 onClick.invoke(item)
             }
-//            if (videoItem != null) {
-//                val duration = convertDuration(videoItem.contentDetails.duration)
-//                binding.durationTv.text = duration
-//                Log.e(
-//                    "com.example.youtube.ui.detail.DetailAdapter",
-//                    "onBind: ${(videoItem.contentDetails)}"
-//                )
         }
     }
-}
 
-
-//object VideoId {
-//    private val viewModel: MainViewModel by viewModel()
-//    fun setVideo(id: String, onResult: (Items?) -> Unit) {
-//        viewModel.getVideo(id).observeForever { resource ->
-//            when (resource.status) {
-//                Resource.Status.SUCCESS -> {
-//                    val video = resource.data?.items?.getOrNull(0)
-//                    onResult(video)
-//                }
-//                else -> {
-//                    onResult(null)
-//                }
-//            }
-//        }
-//    }
-//}
-
-
-object ConvertDuration {
-    fun convertDuration(duration: String): String {
-        val regex = "^PT(\\d+)M(\\d+)S$".toRegex()
-        val matchResult = regex.find(duration)
-        if (matchResult != null && matchResult.groupValues.size == 3) {
-            val minutes = matchResult.groupValues[1].toInt()
-            val seconds = matchResult.groupValues[2].toInt()
-            return "$minutes:${String.format("%02d", seconds)}"
+    object ConvertDuration {
+        fun convertDuration(duration: String): String {
+            val regex = "^PT(\\d+)M(\\d+)S$".toRegex()
+            val matchResult = regex.find(duration)
+            if (matchResult != null && matchResult.groupValues.size == 3) {
+                val minutes = matchResult.groupValues[1].toInt()
+                val seconds = matchResult.groupValues[2].toInt()
+                return "$minutes:${String.format("%02d", seconds)}"
+            }
+            return ""
         }
-        return ""
     }
 }
 

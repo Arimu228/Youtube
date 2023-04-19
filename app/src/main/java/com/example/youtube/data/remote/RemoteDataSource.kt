@@ -16,7 +16,8 @@ class RemoteDataSource(private val apiService: ApiService) : BaseDataSource() {
         apiService.getPlaylists(
             BuildConfig.API_KEY,
             Const.part,
-            Const.channelId
+            Const.channelIdEdSheeran,
+            20
         )
     }
 
@@ -24,7 +25,8 @@ class RemoteDataSource(private val apiService: ApiService) : BaseDataSource() {
         apiService.getPlaylistItem(
             BuildConfig.API_KEY,
             Const.part,
-            playlistId!!
+            playlistId!!,
+            20
         )
     }
 

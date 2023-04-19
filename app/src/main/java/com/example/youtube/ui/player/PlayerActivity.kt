@@ -4,16 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.SparseArray
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
-import com.example.youtube.R
+import at.huber.youtubeExtractor.VideoMeta
+import at.huber.youtubeExtractor.YouTubeExtractor
+import at.huber.youtubeExtractor.YtFile
 import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityPlayerBinding
 import com.example.youtube.ui.MainViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.source.MergingMediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,18 +30,44 @@ class PlayerActivity :  BaseActivity<ActivityPlayerBinding, MainViewModel>() {
     private var currentItem = 0
     private var playbackPosition = 0L
 
+    @SuppressLint("StaticFieldLeak")
     private fun initializePlayer() {
-        player = ExoPlayer.Builder(this)
+        player = ExoPlayer.Builder(this@PlayerActivity)
             .build()
             .also { exoPlayer ->
                 binding.videoView.player = exoPlayer
-                val mediaItem = MediaItem.fromUri(getString(R.string.media_url_mp4))
-                exoPlayer.setMediaItem(mediaItem)
-                exoPlayer.prepare()
-                exoPlayer.playWhenReady = playWhenReady
-                exoPlayer.seekTo(currentItem, playbackPosition)
-                exoPlayer.prepare()
             }
+
+        val youtubeLink = "http://youtube.com/watch?v=${intent.getStringExtra("id")}"
+
+        object: YouTubeExtractor(this) {
+            override fun onExtractionComplete(
+                ytFiles: SparseArray<YtFile>?,
+                videoMeta: VideoMeta?
+            ) {
+                if (ytFiles != null) {
+
+                    val videoTag = 133
+                    val audioTag = 140
+
+                    val videoUri = ytFiles.get(videoTag).url
+                    val audioUri = ytFiles.get(audioTag).url
+
+                    val audioSource = ProgressiveMediaSource.Factory(DefaultHttpDataSource.Factory())
+                        .createMediaSource(MediaItem.fromUri(audioUri))
+
+                    val videoSource = ProgressiveMediaSource.Factory(DefaultHttpDataSource.Factory())
+                        .createMediaSource(MediaItem.fromUri(videoUri))
+
+
+                    player?.setMediaSource(MergingMediaSource(true, videoSource, audioSource), true)
+                    player?.playWhenReady = playWhenReady
+                    player?.seekTo(currentItem, playbackPosition)
+                    player?.prepare()
+                }
+            }
+
+        }.extract(youtubeLink)
     }
     override fun inflateViewBinding(): ActivityPlayerBinding {
         return ActivityPlayerBinding.inflate(layoutInflater)
