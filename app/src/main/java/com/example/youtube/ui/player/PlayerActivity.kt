@@ -183,6 +183,7 @@ class PlayerActivity :  BaseActivity<ActivityPlayerBinding, MainViewModel>() {
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.baseline_fullscreen_exit_24
+                    //
                     )
                 )
                 if (isLandscape) {
