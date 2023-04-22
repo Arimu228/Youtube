@@ -26,11 +26,11 @@ class Repository(private val dataSource: RemoteDataSource) {
         return liveData(Dispatchers.IO) {
             emit(Resource.loading())
             val response = dataSource.getPlaylistItem(playlistId)
-            
+
             val list = ArrayList<String>()
-            
+
             response.data?.items?.forEach { item ->
-            val items = dataSource.getVideo(item?.contentDetails?.videoId)
+                val items = dataSource.getVideo(item?.contentDetails?.videoId)
                 items.data?.items?.get(0)?.contentDetails?.let { list.add(it.duration)
                 }
 

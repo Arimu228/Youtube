@@ -45,13 +45,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_below="@+id/tv_playlist"
         android:layout_marginTop="-2dp"
+        app:use_controller="true"
         app:controller_layout_id="@layout/custom_exo_layout" />
 
     <TextView
@@ -73,11 +73,11 @@
         android:backgroundTint="@color/white"
         android:drawableEnd="@drawable/baseline_cloud_download_24"
         android:text="@string/download"
+        app:strokeWidth="2dp"
         android:textAllCaps="false"
         android:textColor="@color/rd"
         android:textStyle="bold"
-        app:strokeColor="@color/rd"
-        app:strokeWidth="2dp" />
+        app:strokeColor="@color/rd"/>
 
     <TextView
         android:id="@+id/tv_desc"

@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="rd">#FF0000</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

@@ -2,9 +2,12 @@ package com.example.youtube.ui.player
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.SparseArray
+import android.widget.ImageButton
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -12,6 +15,7 @@ import androidx.core.view.isVisible
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
+import com.example.youtube.R
 import com.example.youtube.core.ui.BaseActivity
 import com.example.youtube.databinding.ActivityPlayerBinding
 import com.example.youtube.ui.MainViewModel
@@ -151,5 +155,43 @@ class PlayerActivity :  BaseActivity<ActivityPlayerBinding, MainViewModel>() {
             exoPlayer.release()
         }
         player = null
+    }
+
+    override fun initViews() {
+        super.initViews()
+        val bt_fullscreen = findViewById<ImageButton>(R.id.fullscreen)
+
+        var isFullscreen = false
+        var isLandscape = false
+
+        bt_fullscreen.setOnClickListener {
+            if (!isFullscreen) {
+                bt_fullscreen.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.baseline_fullscreen_24
+                    )
+                )
+                if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                    isLandscape = true
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                } else {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
+                }
+            } else {
+                bt_fullscreen.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.baseline_fullscreen_exit_24
+                    )
+                )
+                if (isLandscape) {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
+                } else {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                }
+            }
+            isFullscreen = !isFullscreen
+        }
     }
 }
